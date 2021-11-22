@@ -12,12 +12,25 @@ class App extends React.Component {
       profession: "engineer",
     },
     show: false,
+    time: 0
   };
+  componentDidMount() {
+    this.timer=setInterval(
+      ()=>this.tick(),1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  tick() {
+    this.setState({time: this.state.time+1})
+  }
   render() {
     return (
       <div className="App">
         <div>
           <button style={{width:100,height:50,borderRadius:10,margin:40}} onClick={()=>{this.setState({show: !this.state.show})}}>Toggle</button>
+          <h2>The time interval : {this.state.time}</h2>
         {(this.state.show)&&(<div><img
             style={{
               width: 120,
