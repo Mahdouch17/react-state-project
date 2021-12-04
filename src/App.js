@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 import image from "./mahdi.jpg";
+import Profile from "./components/Profile";
 
 class App extends React.Component {
   state = {
@@ -12,37 +13,14 @@ class App extends React.Component {
       profession: "engineer",
     },
     show: false,
-    time: 0
   };
-  componentDidMount() {
-    this.timer=setInterval(
-      ()=>this.tick(),1000
-    );
-  }
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-  tick() {
-    this.setState({time: this.state.time+1})
-  }
+  
   render() {
     return (
       <div className="App">
         <div>
           <button style={{width:100,height:50,borderRadius:10,margin:40}} onClick={()=>{this.setState({show: !this.state.show})}}>Toggle</button>
-          <h2>The time interval : {this.state.time}</h2>
-        {(this.state.show)&&(<div><img
-            style={{
-              width: 120,
-              height: 180,
-              border: "2px #1A5276 solid",
-              borderRadius: 15,
-            }}
-            src={this.state.Person.imgSrc}
-          />
-          <div style={{ fontSize: 24 }}>{this.state.Person.fullName}</div>
-          <div style={{ fontSize: 18 }}>{this.state.Person.bio}</div>
-          <div style={{ fontSize: 18 }}>{this.state.Person.profession}</div></div>)}
+        {(this.state.show)&&(<Profile person={this.state.Person}/>)}
         </div>
       </div>
     );
